@@ -1,0 +1,2 @@
+[functions.invitar-inspector]
+verify_jwt = false
