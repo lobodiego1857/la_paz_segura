@@ -79,6 +79,18 @@ Para habilitar «Agregar inspector», ejecuta `supabase functions deploy invitar
 
 No existe registro público: el Administrador invita Inspectores desde el panel mediante la Edge Function `invitar-inspector`; la función usa Auth Admin en Supabase y la clave `service_role` nunca se incluye en el frontend. Las reglas RLS de la base de datos son obligatorias y no deben reemplazarse por ocultar botones.
 
+## Publicación en GitHub Pages
+
+El repositorio usa Vite y no se publica correctamente seleccionando `main` y `/ (root)`, porque GitHub Pages serviría el código fuente sin compilar. El flujo `.github/workflows/deploy-pages.yml` compila el proyecto y publica `dist` cada vez que se actualiza `main`.
+
+1. En GitHub abre **Settings → Pages** y cambia **Build and deployment → Source** a **GitHub Actions**.
+2. En **Settings → Secrets and variables → Actions**, agrega estos *Repository secrets* para que la consulta pública y el acceso a Supabase funcionen en la versión publicada:
+   - `VITE_SUPABASE_URL`: URL del proyecto Supabase.
+   - `VITE_SUPABASE_PUBLISHABLE_KEY`: clave publishable (o anon heredada); nunca uses `service_role` ni una secret key.
+3. Sube los cambios a `main`. En **Actions**, espera que `Publicar en GitHub Pages` termine correctamente. La dirección del sitio será `https://lobodiego1857.github.io/la_paz_segura/` (confirma la URL exacta en **Settings → Pages**).
+
+Si los secretos todavía no están configurados, el sitio se compilará, pero mostrará que falta configurar Supabase y no podrá consultar datos. Las variables `VITE_*` quedan incluidas en el código descargado del navegador; solo la URL y la clave publishable son apropiadas para el frontend, con RLS correctamente configurado.
+
 ## Alcance aprobado: lo que debe cumplir la entrega
 
 - Consulta pública sin inicio de sesión, además de los roles Administrador e Inspector. La consulta pública solo lee zonas activas e inspecciones con historial; el Administrador supervisa y el Inspector realiza el trabajo técnico.

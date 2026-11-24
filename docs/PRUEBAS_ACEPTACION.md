@@ -21,6 +21,7 @@
 | PR-17 | Acceder al área personal con una sesión previa | Todos | Se cierra la sesión anterior y se solicita correo y contraseña; no se abre un rol directamente. Si falla el cierre, se muestra un error y no se concede el acceso. |
 | PR-18 | Recargar la página con sesión activa | Inspector/Administrador | Se restaura la sesión y el área personal sin pedir credenciales nuevamente; si la sesión expiró, se muestra el formulario de acceso. |
 | PR-19 | Volver a la consulta pública desde el área personal | Todos | El mapa recupera su tamaño y muestra los puntos de las zonas activas después de volver a hacerse visible. |
+| PR-20 | Publicación en GitHub Pages | Todos | El flujo de GitHub Actions compila `dist`, publica la app bajo `/la_paz_segura/` y carga recursos sin errores 404; la consulta de Supabase funciona al configurar sus variables de frontend. |
 
 ## Casos adicionales de seguridad
 
